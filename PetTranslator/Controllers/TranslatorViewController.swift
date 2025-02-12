@@ -166,9 +166,10 @@ final class TranslatorViewController: UIViewController {
     private func microphoneButtonDidTap() {
         print("Mic did tap")
             // TODO: Block UI!
-        microphoneImageView.image = UIImage(named: "activeMic")
-        microphoneLabel.text = "Recording..."
-        animateRecordingIndicator()
+            //TODO: тут мы проверяем разрешение на запись. ЕСли ее нету показываем алерт и не делаем ничего если нету разрешения. Если разрешение есть, то мы меняем иконку и текст, блокируем UI и начинаем запись
+//        microphoneImageView.image = UIImage(named: "activeMic")
+//        microphoneLabel.text = "Recording..."
+//        animateRecordingIndicator()
 //        permissionsManager.checkMicrophonePermission()
             // presenter.startRecording
     }
