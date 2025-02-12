@@ -21,7 +21,7 @@ final class TranslatorViewController: UIViewController {
         setupConstraints()
         highlightChosenPet()
     }
-    
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Translator"
@@ -151,10 +151,57 @@ final class TranslatorViewController: UIViewController {
         buttonStackView.addArrangedSubview(dogButton)
     }
     
+    private func animateRecordingIndicator() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 1.0
+        animation.toValue = 1.2
+        animation.duration = 0.5
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+
+        microphoneImageView.layer.add(animation, forKey: "pulse")
+    }
+    
     @objc
     private func microphoneButtonDidTap() {
         print("Mic did tap")
+            // TODO: Block UI!
+        microphoneImageView.image = UIImage(named: "activeMic")
+        microphoneLabel.text = "Recording..."
+        animateRecordingIndicator()
+//        permissionsManager.checkMicrophonePermission()
+            // presenter.startRecording
     }
+    
+//    func didGrantMicrophonePermission() {
+//        print("✅ Доступ к микрофону разрешен!")
+//    }
+//    
+//    func didDenyMicrophonePermission() {
+//        print("❌ Доступ к микрофону запрещен!")
+//        showPermissionDeniedAlert()
+//    }
+//    
+//    private func showPermissionDeniedAlert() {
+//        let alertController = UIAlertController(
+//            title: "Enable Microphone Access",
+//            message: "Please allow access to your\n microphone to use the app’s\n features",
+//            preferredStyle: .alert
+//        )
+//
+//        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+//            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+//                UIApplication.shared.open(settingsURL)
+//            }
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(settingsAction)
+//
+//        present(alertController, animated: true)
+//    }
     
     @objc
     private func catButtonDidTap() {
