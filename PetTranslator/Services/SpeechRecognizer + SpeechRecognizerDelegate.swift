@@ -10,6 +10,7 @@ import AVFoundation
 
 protocol SpeechRecognizerDelegate: AnyObject {
     func didRecognizeSpeech(_ text: String)
+    func didFinishRecording()
 }
 
 final class SpeechRecognizer: NSObject {
@@ -46,6 +47,8 @@ final class SpeechRecognizer: NSObject {
     }
     
     func stopListening() {
+        speechRecognizerDelegate?.didFinishRecording()
+        
         audioEngine.stop()
         recognitionRequest?.endAudio()
         recognitionTask?.cancel()
