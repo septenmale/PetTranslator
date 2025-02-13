@@ -11,9 +11,7 @@ final class TranslatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: add gradient
-        // TODO: try to fina an appproptiate font
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.applyGradient()
         
         presenter = TranslatorPresenter(viewDelegate: self)
         

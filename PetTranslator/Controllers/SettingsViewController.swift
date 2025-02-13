@@ -11,7 +11,7 @@ final class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.applyGradient()
         
         setupTableView()
         setupConstraints()

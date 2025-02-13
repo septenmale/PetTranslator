@@ -31,7 +31,7 @@ final class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.applyGradient()
         resultLabel.text = translatedText
         petImageView.image = selectedImage
         
