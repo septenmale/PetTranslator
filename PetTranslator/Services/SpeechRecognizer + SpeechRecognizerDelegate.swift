@@ -44,6 +44,10 @@ final class SpeechRecognizer: NSObject {
         try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         audioEngine.prepare()
         try? audioEngine.start()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.stopListening()
+        }
     }
     
     func stopListening() {

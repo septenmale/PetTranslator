@@ -15,12 +15,16 @@ final class TranslatorViewController: UIViewController {
         // TODO: try to fina an appproptiate font
         view.backgroundColor = UIColor(named: "backgroundColor")
         
+        presenter = TranslatorPresenter(viewDelegate: self)
+        
         setupMicrophoneButton()
         setupButtonStackView()
         setupViews()
         setupConstraints()
         highlightChosenPet()
     }
+    
+    private lazy var presenter = TranslatorPresenter(viewDelegate: self)
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -164,49 +168,11 @@ final class TranslatorViewController: UIViewController {
     
     @objc
     private func microphoneButtonDidTap() {
-        print("Mic did tap")
-            // TODO: Block UI!
-            //TODO: тут мы проверяем разрешение на запись. ЕСли ее нету показываем алерт и не делаем ничего если нету разрешения. Если разрешение есть, то мы меняем иконку и текст, блокируем UI и начинаем запись
-//        microphoneImageView.image = UIImage(named: "activeMic")
-//        microphoneLabel.text = "Recording..."
-//        animateRecordingIndicator()
-//        permissionsManager.checkMicrophonePermission()
-            // presenter.startRecording
+        presenter.microphoneButtonTapped()
     }
-    
-//    func didGrantMicrophonePermission() {
-//        print("✅ Доступ к микрофону разрешен!")
-//    }
-//    
-//    func didDenyMicrophonePermission() {
-//        print("❌ Доступ к микрофону запрещен!")
-//        showPermissionDeniedAlert()
-//    }
-//    
-//    private func showPermissionDeniedAlert() {
-//        let alertController = UIAlertController(
-//            title: "Enable Microphone Access",
-//            message: "Please allow access to your\n microphone to use the app’s\n features",
-//            preferredStyle: .alert
-//        )
-//
-//        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
-//            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-//                UIApplication.shared.open(settingsURL)
-//            }
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(settingsAction)
-//
-//        present(alertController, animated: true)
-//    }
     
     @objc
     private func catButtonDidTap() {
-        print("Cat button did tap")
         guard petImageView.image == UIImage(named: "dogImage") else { return }
         petImageView.image = UIImage(named: "catImage")
         
@@ -215,7 +181,6 @@ final class TranslatorViewController: UIViewController {
     
     @objc
     private func dogButtonDidTap() {
-        print("Dog button did tap")
         guard petImageView.image == UIImage(named: "catImage") else { return }
         petImageView.image = UIImage(named: "dogImage")
         
@@ -295,6 +260,61 @@ final class TranslatorViewController: UIViewController {
             
         ])
         
+    }
+    
+}
+
+extension TranslatorViewController: TranslatorPresenterDelegate {
+    
+    func updateUIForRecording() {
+        
+        microphoneImageView.image = UIImage(named: "activeMic")
+        microphoneLabel.text = "Recording..."
+        
+        animateRecordingIndicator()
+        
+        dogButton.isEnabled = false
+        catButton.isEnabled = false
+        
+//        tabBarController?.tabBar.isHidden = true
+        
+    }
+    
+    func updateUIForProcessing() {
+        //TODO: Тут скрываю все кроме картинки животного и добавляю текст на середину экрана что идет перевод
+//        tabBarController?.tabBar.isHidden = false
+        titleLabel.text = "Залупа полная"
+    }
+    
+    func navigateToResult(with text: String) {
+        
+        let resultVC = ResultViewController(translatedText: text)
+        resultVC.modalPresentationStyle = .fullScreen
+        resultVC.modalTransitionStyle = .coverVertical
+        
+        present(resultVC, animated: true)
+        
+    }
+    
+    func showPermissionDeniedAlert() {
+        let alertController = UIAlertController(
+            title: "Enable Microphone Access",
+            message: "Please allow access to your microphone to use the app’s features",
+            preferredStyle: .alert
+        )
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        
+        present(alertController, animated: true)
     }
     
 }
