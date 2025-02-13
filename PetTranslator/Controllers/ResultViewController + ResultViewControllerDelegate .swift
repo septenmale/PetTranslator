@@ -7,14 +7,21 @@
 
 import UIKit
 
+protocol ResultViewControllerDelegate: AnyObject {
+    func didDismissResultViewController()
+}
+
 final class ResultViewController: UIViewController {
+    
+    weak var delegate: ResultViewControllerDelegate?
     
     private let translatedText: String
     private let selectedImage: UIImage
     
-    init(translatedText: String, selectedImage: UIImage) {
+    init(translatedText: String, selectedImage: UIImage, delegate: ResultViewControllerDelegate?) {
         self.translatedText = translatedText
         self.selectedImage = selectedImage
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,7 +55,7 @@ final class ResultViewController: UIViewController {
         button.setImage(UIImage(named: "closeButtonForResultVC"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        //        button.addTarget(self, action: #selector(dogButtonDidTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(closeDidTap), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -88,6 +95,13 @@ final class ResultViewController: UIViewController {
         return view
     }()
     
+    @objc
+    private func closeDidTap() {
+        dismiss(animated: false) { [weak self] in
+            self?.delegate?.didDismissResultViewController()
+        }
+    }
+    
     private func setupConstraints() {
         
         view.addSubview(closeButton)
@@ -102,7 +116,6 @@ final class ResultViewController: UIViewController {
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            titleLabel.heightAnchor.constraint(equalToConstant: 58),
             
             closeButton.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 5),
             closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -111,6 +124,7 @@ final class ResultViewController: UIViewController {
             
             resultContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             resultContainerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 91),
+            resultContainerView.bottomAnchor.constraint(equalTo: petImageView.topAnchor, constant: -125),
             resultContainerView.widthAnchor.constraint(equalToConstant: 291),
             resultContainerView.heightAnchor.constraint(equalToConstant: 142),
             
@@ -119,6 +133,7 @@ final class ResultViewController: UIViewController {
             
             lineView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 259),
             lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 242),
+            lineView.bottomAnchor.constraint(equalTo: petImageView.topAnchor, constant: -19.38),
             
             petImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             petImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -134),
@@ -128,4 +143,4 @@ final class ResultViewController: UIViewController {
     
 }
 
-//настроить кнопку возврата + заблокировать микрфоон пока идет запись. Так же подшаманить UI со стрелкой
+//настроить кнопку возврата + заблокировать микрфоон пока идет запись.

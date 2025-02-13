@@ -30,7 +30,7 @@ final class SettingsTableViewCell: UITableViewCell {
     
     private func setupCell() {
         backgroundColor = .clear
-        contentView.backgroundColor = UIColor(named: "settingsTableViewBackgroundColor")
+        contentView.backgroundColor = UIColor(named: "appPurpleColor")
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         

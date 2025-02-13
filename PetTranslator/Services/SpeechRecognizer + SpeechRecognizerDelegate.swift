@@ -23,8 +23,13 @@ final class SpeechRecognizer: NSObject {
     private var recognitionTask: SFSpeechRecognitionTask?
     
     func startListening() {
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         let node = audioEngine.inputNode
+        
+        if node.inputFormat(forBus: 0).channelCount > 0 {
+            node.removeTap(onBus: 0)
+        }
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         recognitionRequest?.shouldReportPartialResults = false
         
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest!) { result, error in
@@ -53,6 +58,7 @@ final class SpeechRecognizer: NSObject {
     func stopListening() {
         speechRecognizerDelegate?.didFinishRecording()
         
+        audioEngine.inputNode.removeTap(onBus: 0)
         audioEngine.stop()
         recognitionRequest?.endAudio()
         recognitionTask?.cancel()

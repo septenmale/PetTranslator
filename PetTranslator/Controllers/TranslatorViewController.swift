@@ -9,11 +9,6 @@ import UIKit
 
 final class TranslatorViewController: UIViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        resetUIAfterProcessing()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: add gradient
@@ -191,16 +186,6 @@ final class TranslatorViewController: UIViewController {
         dogOrCatContainerView.isHidden = true
     }
     
-    private func resetUIAfterProcessing() {
-        stubLabel.isHidden = true
-        titleLabel.isHidden = false
-        humanLabel.isHidden = false
-        swapArrowsView.isHidden = false
-        petLabel.isHidden = false
-        microphoneContainerView.isHidden = false
-        dogOrCatContainerView.isHidden = false
-    }
-    
     @objc
     private func microphoneButtonDidTap() {
         presenter.microphoneButtonTapped()
@@ -314,6 +299,8 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
         
         dogButton.isEnabled = false
         catButton.isEnabled = false
+        microphoneContainerView.isUserInteractionEnabled = false
+        tabBarController?.tabBar.isUserInteractionEnabled = false
         
     }
     
@@ -325,7 +312,7 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
         
         guard let selectedImage = petImageView.image else { return }
         
-        let resultVC = ResultViewController(translatedText: text, selectedImage: selectedImage)
+        let resultVC = ResultViewController(translatedText: text, selectedImage: selectedImage, delegate: self)
         resultVC.modalPresentationStyle = .fullScreen
         resultVC.modalTransitionStyle = .coverVertical
         
@@ -354,6 +341,31 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
         
         present(alertController, animated: true)
         
+    }
+    
+}
+
+extension TranslatorViewController: ResultViewControllerDelegate {
+    
+    func didDismissResultViewController() {
+        restoreUIAfterTranslation()
+    }
+    
+    private func restoreUIAfterTranslation() {
+        titleLabel.isHidden = false
+        humanLabel.isHidden = false
+        swapArrowsView.isHidden = false
+        petLabel.isHidden = false
+        microphoneContainerView.isHidden = false
+        dogOrCatContainerView.isHidden = false
+        stubLabel.isHidden = true
+        dogButton.isEnabled = true
+        catButton.isEnabled = true
+        microphoneContainerView.isUserInteractionEnabled = true
+        tabBarController?.tabBar.isUserInteractionEnabled = true
+        
+        microphoneImageView.image = UIImage(named: "microphoneImage")
+        microphoneLabel.text = "Start Speak"
     }
     
 }

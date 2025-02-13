@@ -16,10 +16,10 @@ final class TranslationManager {
     weak var translationManagerDelegate: TranslationManagerDelegate?
     
     private let phrases = [
-        "Woof! I want to play!",
-        "Meow... I'm hungry!",
-        "Bark! Let’s go outside!",
-        "Purr... I love you!"
+        "I want to play!",
+        "I'm hungry!",
+        "Let’s go outside!",
+        "I love you!"
     ]
     
     func translateText() {
