@@ -42,7 +42,7 @@ final class TranslatorPresenter {
     private func processTranslation() {
         viewDelegate?.updateUIForProcessing()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.translationManager.translateText()
         }
     }

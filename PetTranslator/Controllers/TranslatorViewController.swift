@@ -9,6 +9,11 @@ import UIKit
 
 final class TranslatorViewController: UIViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resetUIAfterProcessing()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: add gradient
@@ -25,7 +30,7 @@ final class TranslatorViewController: UIViewController {
     }
     
     private lazy var presenter = TranslatorPresenter(viewDelegate: self)
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Translator"
@@ -162,8 +167,38 @@ final class TranslatorViewController: UIViewController {
         animation.duration = 0.5
         animation.autoreverses = true
         animation.repeatCount = .infinity
-
+        
         microphoneImageView.layer.add(animation, forKey: "pulse")
+    }
+    
+    private let stubLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Process of translation..."
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
+    private func changeUIDuringProcessing() {
+        stubLabel.isHidden = false
+        titleLabel.isHidden = true
+        humanLabel.isHidden = true
+        swapArrowsView.isHidden = true
+        petLabel.isHidden = true
+        microphoneContainerView.isHidden = true
+        dogOrCatContainerView.isHidden = true
+    }
+    
+    private func resetUIAfterProcessing() {
+        stubLabel.isHidden = true
+        titleLabel.isHidden = false
+        humanLabel.isHidden = false
+        swapArrowsView.isHidden = false
+        petLabel.isHidden = false
+        microphoneContainerView.isHidden = false
+        dogOrCatContainerView.isHidden = false
     }
     
     @objc
@@ -206,6 +241,7 @@ final class TranslatorViewController: UIViewController {
         view.addSubview(microphoneContainerView)
         view.addSubview(dogOrCatContainerView)
         view.addSubview(petImageView)
+        view.addSubview(stubLabel)
         
     }
     
@@ -258,6 +294,9 @@ final class TranslatorViewController: UIViewController {
             petImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             petImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -134),
             
+            stubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stubLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            
         ])
         
     }
@@ -276,19 +315,17 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
         dogButton.isEnabled = false
         catButton.isEnabled = false
         
-//        tabBarController?.tabBar.isHidden = true
-        
     }
     
     func updateUIForProcessing() {
-        //TODO: Тут скрываю все кроме картинки животного и добавляю текст на середину экрана что идет перевод
-//        tabBarController?.tabBar.isHidden = false
-        titleLabel.text = "Залупа полная"
+        changeUIDuringProcessing()
     }
     
     func navigateToResult(with text: String) {
         
-        let resultVC = ResultViewController(translatedText: text)
+        guard let selectedImage = petImageView.image else { return }
+        
+        let resultVC = ResultViewController(translatedText: text, selectedImage: selectedImage)
         resultVC.modalPresentationStyle = .fullScreen
         resultVC.modalTransitionStyle = .coverVertical
         
@@ -297,6 +334,7 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
     }
     
     func showPermissionDeniedAlert() {
+        
         let alertController = UIAlertController(
             title: "Enable Microphone Access",
             message: "Please allow access to your microphone to use the app’s features",
@@ -315,6 +353,7 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
         alertController.addAction(settingsAction)
         
         present(alertController, animated: true)
+        
     }
     
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group.png",
+      "filename" : "Close.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Tilda_Icons_30_system_settings@2x.png",
+      "filename" : "Close@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Tilda_Icons_30_system_settings@3x.png",
+      "filename" : "Close@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
