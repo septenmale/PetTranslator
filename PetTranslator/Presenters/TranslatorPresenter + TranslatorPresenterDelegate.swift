@@ -66,7 +66,7 @@ extension TranslatorPresenter: SpeechRecognizerDelegate {
     func didRecognizeSpeech(_ text: String) {
         processTranslation()
     }
-    //TODO: Check it out
+    
     func didFinishRecording() {
         processTranslation()
     }

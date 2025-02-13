@@ -12,7 +12,7 @@ final class SettingsTableViewCell: UITableViewCell {
     static let reuseIdentifier = "SettingsCell"
     
     private let arrowImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "chevron.right")) // TODO: поменять на макет
+        let imageView = UIImageView(image: UIImage(named: "arrowForSettings"))
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
