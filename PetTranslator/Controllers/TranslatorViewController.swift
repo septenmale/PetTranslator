@@ -8,20 +8,7 @@
 import UIKit
 
 final class TranslatorViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.applyGradient()
-        
-        presenter = TranslatorPresenter(viewDelegate: self)
-        
-        setupMicrophoneButton()
-        setupButtonStackView()
-        setupViews()
-        setupConstraints()
-        highlightChosenPet()
-    }
-    
+    // MARK: - Private Properties
     private lazy var presenter = TranslatorPresenter(viewDelegate: self)
     
     private let titleLabel: UILabel = {
@@ -138,6 +125,40 @@ final class TranslatorViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    // MARK: - Overrides Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.applyGradient()
+        
+        presenter = TranslatorPresenter(viewDelegate: self)
+        
+        setupMicrophoneButton()
+        setupButtonStackView()
+        setupViews()
+        setupConstraints()
+        highlightChosenPet()
+    }
+    // MARK: - Private Methods
+    @objc
+    private func microphoneButtonDidTap() {
+        presenter.microphoneButtonTapped()
+    }
+    
+    @objc
+    private func catButtonDidTap() {
+        guard petImageView.image == UIImage(named: "dogImage") else { return }
+        petImageView.image = UIImage(named: "catImage")
+        
+        highlightChosenPet()
+    }
+    
+    @objc
+    private func dogButtonDidTap() {
+        guard petImageView.image == UIImage(named: "catImage") else { return }
+        petImageView.image = UIImage(named: "dogImage")
+        
+        highlightChosenPet()
+    }
     
     private func setupMicrophoneButton() {
         microphoneContainerView.addSubview(microphoneImageView)
@@ -184,27 +205,6 @@ final class TranslatorViewController: UIViewController {
         dogOrCatContainerView.isHidden = true
     }
     
-    @objc
-    private func microphoneButtonDidTap() {
-        presenter.microphoneButtonTapped()
-    }
-    
-    @objc
-    private func catButtonDidTap() {
-        guard petImageView.image == UIImage(named: "dogImage") else { return }
-        petImageView.image = UIImage(named: "catImage")
-        
-        highlightChosenPet()
-    }
-    
-    @objc
-    private func dogButtonDidTap() {
-        guard petImageView.image == UIImage(named: "catImage") else { return }
-        petImageView.image = UIImage(named: "dogImage")
-        
-        highlightChosenPet()
-    }
-    
     private func highlightChosenPet() {
         if petImageView.image == UIImage(named: "dogImage") {
             catButton.alpha = 0.6
@@ -216,7 +216,6 @@ final class TranslatorViewController: UIViewController {
     }
     
     private func setupViews() {
-        
         view.addSubview(titleLabel)
         view.addSubview(humanLabel)
         view.addSubview(swapArrowsView)
@@ -225,13 +224,11 @@ final class TranslatorViewController: UIViewController {
         view.addSubview(dogOrCatContainerView)
         view.addSubview(petImageView)
         view.addSubview(stubLabel)
-        
     }
     
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             titleLabel.heightAnchor.constraint(equalToConstant: 58),
@@ -279,13 +276,12 @@ final class TranslatorViewController: UIViewController {
             
             stubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stubLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            
         ])
         
     }
     
 }
-
+// MARK: - TranslatorPresenterDelegate
 extension TranslatorViewController: TranslatorPresenterDelegate {
     
     func updateUIForRecording() {
@@ -342,7 +338,7 @@ extension TranslatorViewController: TranslatorPresenterDelegate {
     }
     
 }
-
+// MARK: - ResultViewControllerDelegate
 extension TranslatorViewController: ResultViewControllerDelegate {
     
     func didDismissResultViewController() {

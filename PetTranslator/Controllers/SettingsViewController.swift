@@ -8,16 +8,8 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.applyGradient()
-        
-        setupTableView()
-        setupConstraints()
-    }
-    
-    private lazy var titleLabel: UILabel = {
+    // MARK: - Private Properties
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Settings"
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
@@ -36,7 +28,16 @@ final class SettingsViewController: UIViewController {
         "Privacy Policy",
         "Terms of Use",
     ]
-    
+    // MARK: - Override Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.applyGradient()
+        
+        setupTableView()
+        setupViews()
+        setupConstraints()
+    }
+    // MARK: - Private Methods
     private func setupTableView() {
         
         tableView.delegate = self
@@ -48,10 +49,12 @@ final class SettingsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func setupConstraints() {
-        
+    private func setupViews() {
         view.addSubview(titleLabel)
         view.addSubview(tableView)
+    }
+    
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -62,13 +65,12 @@ final class SettingsViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -196)
-            
         ])
         
     }
     
 }
-
+// MARK: - UITableViewDataSource
 extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,7 +78,9 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as! SettingsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as? SettingsTableViewCell else {
+            return UITableViewCell()
+        }
         
         cell.textLabel?.text = tableViewTitles[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -87,7 +91,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
 }
-
+// MARK: - UITableViewDelegate
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

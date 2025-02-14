@@ -6,22 +6,22 @@
 //
 
 import Foundation
-
+// MARK: - TranslatorPresenterDelegate
 protocol TranslatorPresenterDelegate: AnyObject {
     func updateUIForRecording()
     func updateUIForProcessing()
     func navigateToResult(with text: String)
     func showPermissionDeniedAlert()
 }
-
+// MARK: - TranslatorPresenter
 final class TranslatorPresenter {
-    
+    // MARK: - Public Properties
     weak var viewDelegate: TranslatorPresenterDelegate?
-    
+    // MARK: - Private Properties
     private let permissionsManager = PermissionsManager()
     private let speechRecognizer = SpeechRecognizer()
     private let translationManager = TranslationManager()
-    
+    // MARK: - Initializers
     init(viewDelegate: TranslatorPresenterDelegate) {
         self.viewDelegate = viewDelegate
         
@@ -29,11 +29,11 @@ final class TranslatorPresenter {
         speechRecognizer.speechRecognizerDelegate = self
         translationManager.translationManagerDelegate = self
     }
-    
+    // MARK: - Public Methods
     func microphoneButtonTapped() {
         permissionsManager.checkMicrophonePermission()
     }
-    
+    // MARK: - Private Methods
     private func startRecording() {
         viewDelegate?.updateUIForRecording()
         speechRecognizer.startListening()
@@ -48,7 +48,7 @@ final class TranslatorPresenter {
     }
     
 }
-
+// MARK: - PermissionsManagerDelegate
 extension TranslatorPresenter: PermissionsManagerDelegate {
     
     func didGrantMicrophonePermission() {
@@ -60,7 +60,7 @@ extension TranslatorPresenter: PermissionsManagerDelegate {
     }
     
 }
-
+// MARK: - SpeechRecognizerDelegate
 extension TranslatorPresenter: SpeechRecognizerDelegate {
     
     func didRecognizeSpeech(_ text: String) {
@@ -72,7 +72,7 @@ extension TranslatorPresenter: SpeechRecognizerDelegate {
     }
     
 }
-
+// MARK: - TranslationManagerDelegate
 extension TranslatorPresenter: TranslationManagerDelegate {
     
     func didTranslateText(_ translatedText: String) {

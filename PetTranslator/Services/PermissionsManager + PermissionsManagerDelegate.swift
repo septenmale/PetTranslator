@@ -48,14 +48,14 @@ final class PermissionsManager {
             AVAudioApplication.requestRecordPermission { granted in
                 DispatchQueue.main.async {
                     granted ? self.permissionsManagerDelegate?.didGrantMicrophonePermission()
-                            : self.permissionsManagerDelegate?.didDenyMicrophonePermission()
+                    : self.permissionsManagerDelegate?.didDenyMicrophonePermission()
                 }
             }
         } else {
             AVAudioSession.sharedInstance().requestRecordPermission { granted in
                 DispatchQueue.main.async {
                     granted ? self.permissionsManagerDelegate?.didGrantMicrophonePermission()
-                            : self.permissionsManagerDelegate?.didDenyMicrophonePermission()
+                    : self.permissionsManagerDelegate?.didDenyMicrophonePermission()
                 }
             }
         }

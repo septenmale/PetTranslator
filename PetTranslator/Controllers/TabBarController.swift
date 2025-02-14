@@ -51,7 +51,7 @@ final class TabBarController: UITabBarController {
                                                image: UIImage(named: "Translator"),
                                                tag: 2)
         
-        settingsVC.tabBarItem = UITabBarItem(title: "Settings",
+        settingsVC.tabBarItem = UITabBarItem(title: "Clicker",
                                              image: UIImage(named: "Settings"),
                                              tag: 1)
         

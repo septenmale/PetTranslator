@@ -28,6 +28,14 @@ final class SettingsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = bounds.inset(by: UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0))
+        
+        textLabel?.frame.origin.y = (contentView.frame.height - (textLabel?.frame.height ?? 0)) / 2
+    }
+    
     private func setupCell() {
         backgroundColor = .clear
         contentView.backgroundColor = UIColor(named: "appPurpleColor")
@@ -44,11 +52,4 @@ final class SettingsTableViewCell: UITableViewCell {
         ])
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = bounds.inset(by: UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0))
-        
-        textLabel?.frame.origin.y = (contentView.frame.height - (textLabel?.frame.height ?? 0)) / 2
-    }
 }
