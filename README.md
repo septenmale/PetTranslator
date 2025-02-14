@@ -2,6 +2,8 @@
 
 PetTranslator is an iOS application that allows users to "translate" their speech into pet language. The app provides a fun and interactive way to communicate with virtual pets by generating random predefined phrases in response to voice input.
 
+https://github.com/user-attachments/assets/671c94be-dd4e-4494-9f69-63efeddb6f0e
+
 ## ✅ Features
 
 - 🔒 **Microphone Permissions Handling**: Ensures proper permission handling before recording.
