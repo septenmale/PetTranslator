@@ -6,7 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		F51079512D5F41AF008FA5A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F561ED352D5B4E6C00A63A5D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F561ED3C2D5B4E6C00A63A5D;
+			remoteInfo = PetTranslator;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		F510794D2D5F41AF008FA5A1 /* PetTranslatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetTranslatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F561ED3D2D5B4E6C00A63A5D /* PetTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +32,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F510794E2D5F41AF008FA5A1 /* PetTranslatorTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PetTranslatorTests;
+			sourceTree = "<group>";
+		};
 		F561ED3F2D5B4E6C00A63A5D /* PetTranslator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +48,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F510794A2D5F41AF008FA5A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F561ED3A2D5B4E6C00A63A5D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				F561ED3F2D5B4E6C00A63A5D /* PetTranslator */,
+				F510794E2D5F41AF008FA5A1 /* PetTranslatorTests */,
 				F561ED3E2D5B4E6C00A63A5D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F561ED3D2D5B4E6C00A63A5D /* PetTranslator.app */,
+				F510794D2D5F41AF008FA5A1 /* PetTranslatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +86,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F510794C2D5F41AF008FA5A1 /* PetTranslatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F51079552D5F41AF008FA5A1 /* Build configuration list for PBXNativeTarget "PetTranslatorTests" */;
+			buildPhases = (
+				F51079492D5F41AF008FA5A1 /* Sources */,
+				F510794A2D5F41AF008FA5A1 /* Frameworks */,
+				F510794B2D5F41AF008FA5A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F51079522D5F41AF008FA5A1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F510794E2D5F41AF008FA5A1 /* PetTranslatorTests */,
+			);
+			name = PetTranslatorTests;
+			packageProductDependencies = (
+			);
+			productName = PetTranslatorTests;
+			productReference = F510794D2D5F41AF008FA5A1 /* PetTranslatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F561ED3C2D5B4E6C00A63A5D /* PetTranslator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F561ED502D5B4E6D00A63A5D /* Build configuration list for PBXNativeTarget "PetTranslator" */;
@@ -93,6 +141,10 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					F510794C2D5F41AF008FA5A1 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = F561ED3C2D5B4E6C00A63A5D;
+					};
 					F561ED3C2D5B4E6C00A63A5D = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -113,11 +165,19 @@
 			projectRoot = "";
 			targets = (
 				F561ED3C2D5B4E6C00A63A5D /* PetTranslator */,
+				F510794C2D5F41AF008FA5A1 /* PetTranslatorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F510794B2D5F41AF008FA5A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F561ED3B2D5B4E6C00A63A5D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +188,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F51079492D5F41AF008FA5A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F561ED392D5B4E6C00A63A5D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +204,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F51079522D5F41AF008FA5A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F561ED3C2D5B4E6C00A63A5D /* PetTranslator */;
+			targetProxy = F51079512D5F41AF008FA5A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		F51079532D5F41AF008FA5A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 99N2YN9VA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Viktor.PetTranslatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetTranslator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetTranslator";
+			};
+			name = Debug;
+		};
+		F51079542D5F41AF008FA5A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 99N2YN9VA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Viktor.PetTranslatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetTranslator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetTranslator";
+			};
+			name = Release;
+		};
 		F561ED512D5B4E6D00A63A5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -316,6 +427,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F51079552D5F41AF008FA5A1 /* Build configuration list for PBXNativeTarget "PetTranslatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F51079532D5F41AF008FA5A1 /* Debug */,
+				F51079542D5F41AF008FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F561ED382D5B4E6C00A63A5D /* Build configuration list for PBXProject "PetTranslator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
