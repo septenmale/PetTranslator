@@ -56,7 +56,7 @@ Planned improvements and new features:
 
 ## 💬 Feedback & Contributions
 
-We welcome feedback and contributions! If you find a bug or have an idea to improve the app, feel free to open an issue or submit a pull request.
+If you find a bug or have an idea to improve the app, feel free to open an issue or submit a pull request.
 
 ---
 
